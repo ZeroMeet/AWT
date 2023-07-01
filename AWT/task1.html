@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./task1.css" />
+  <title>Task 1</title>
+</head>
+<body class="main">
+  <h1>Enter Two numbers and perform different operations</h1>
+  <div>
+    <label for="number_1">Number 1: </label>
+    <input id="number_1" placeholder="Enter Number 1" />
+    <span class="error" id="error_1"></span>
+  </div>
+  <br />
+  <div>
+    <label for="number_2">Number 2: </label>
+    <input id="number_2" placeholder="Enter Number 2" />
+    <span class="error" id="error_2"></span>
+  </div>
+  <br />
+  <div>
+    <label>Result: </label>
+    <span id="Result"></span>
+  </div>
+  <br />
+  <div>
+    <button class="button" id="button_1">Sum</button>
+    <button class="button" id="button_2">Sub</button>
+    <button class="button" id="button_3">Mul</button>
+  </div>
+
+  <script>
+    const button_1 = document.getElementById("button_1");
+    const button_2 = document.getElementById("button_2");
+    const button_3 = document.getElementById("button_3");
+
+    button_1.addEventListener("click", () => {
+      let n1 = document.getElementById("number_1").value;
+      let n2 = document.getElementById("number_2").value;
+
+      if (isNaN(n1)) {
+        document.getElementById("error_1").innerHTML = "* Enter a valid number";
+      } else if (isNaN(n2)) {
+        document.getElementById("error_2").innerHTML = "* Enter a valid number";
+      } else if (n1 === "") {
+        document.getElementById("error_1").innerHTML = "* Please enter a number";
+      } else if (n2 === "") {
+        document.getElementById("error_2").innerHTML = "* Please enter a number";
+      } else {
+        document.getElementById("error_1").innerHTML = "";
+        document.getElementById("error_2").innerHTML = "";
+        document.getElementById("Result").innerHTML = Number(n1) + Number(n2);
+      }
+    });
+
+    button_2.addEventListener("click", () => {
+      let n1 = document.getElementById("number_1").value;
+      let n2 = document.getElementById("number_2").value;
+
+      if (isNaN(n1)) {
+        document.getElementById("error_1").innerHTML = "* Enter a valid number";
+      } else if (isNaN(n2)) {
+        document.getElementById("error_2").innerHTML = "* Enter a valid number";
+      } else if (n1 === "") {
+        document.getElementById("error_1").innerHTML = "* Please enter a number";
+      } else if (n2 === "") {
+        document.getElementById("error_2").innerHTML = "* Please enter a number";
+      } else {
+        document.getElementById("error_1").innerHTML = "";
+        document.getElementById("error_2").innerHTML = "";
+        document.getElementById("Result").innerHTML = Number(n1) - Number(n2);
+      }
+    });
+
+    button_3.addEventListener("click", () => {
+      let n1 = document.getElementById("number_1").value;
+      let n2 = document.getElementById("number_2").value;
+
+      if (isNaN(n1)) {
+        document.getElementById("error_1").innerHTML = "* Enter a valid number";
+      } else if (isNaN(n2)) {
+        document.getElementById("error_2").innerHTML = "* Enter a valid number";
+      } else if (n1 === "") {
+        document.getElementById("error_1").innerHTML = "* Please enter a number";
+      } else if (n2 === "") {
+        document.getElementById("error_2").innerHTML = "* Please enter a number";
+      } else {
+        document.getElementById("error_1").innerHTML = "";
+        document.getElementById("error_2").innerHTML = "";
+        document.getElementById("Result").innerHTML = Number(n1) * Number(n2);
+      }
+    });
+  </script>
+</body>
+</html>

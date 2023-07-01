@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+
+    #msg {
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter both numbers to perform operations</h2>
+    <label for="num1">Number 1:</label>
+    <input type="number" id="num1" onblur="blurHandler()" />
+    <span id="num1Error" class="error"></span>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" id="num2" onblur="blurHandler()" />
+    <span id="num2Error" class="error"></span>
+
+    <label id="msg"></label>
+  </div>
+
+  <script>
+    function blurHandler() {
+      var num1 = document.getElementById("num1").value;
+      var num2 = document.getElementById("num2").value;
+      var msgLabel = document.getElementById("msg");
+      var num1Error = document.getElementById("num1Error");
+      var num2Error = document.getElementById("num2Error");
+
+      num1Error.innerHTML = "";
+      num2Error.innerHTML = "";
+      msgLabel.innerHTML = "";
+
+      if (num1 === "") {
+        num1Error.textContent = "* Please enter a number";
+        return;
+      }
+
+      if (isNaN(num1)) {
+        num1Error.textContent = "* Invalid input";
+        return;
+      }
+
+      if (num2 === "") {
+        num2Error.textContent = "* Please enter a number";
+        return;
+      }
+
+      if (isNaN(num2)) {
+        num2Error.textContent = "* Invalid input";
+        return;
+      }
+
+      var sum = Number(num1) + Number(num2);
+      var sub = Number(num1) - Number(num2);
+      var mul = Number(num1) * Number(num2);
+
+      msgLabel.innerHTML = "Sum: " + sum + "<br><br>Sub: " + sub + "<br><br>Mul: " + mul;
+    }
+  </script>
+</body>
+</html>
