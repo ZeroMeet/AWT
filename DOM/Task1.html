@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="form-container">
+            <label for="name">Name:</label>
+            <input type="text"  name="name" required>
+            <label for="place">Place:</label>
+            <input type="text" id="place" name="place" required>
+            <button onclick="addData()">Add</button>
+        </div>
+
+        <table id="data-table">
+            <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Action</th>
+            </tr>
+        </table>
+
+        <div class="pagination">
+            <button onclick="previousPage()">Previous</button>
+            <button onclick="nextPage()">Next</button>
+        </div>
+
+        <script>
+            var data = [
+                ["John", "New York"],
+                ["Alice", "London"],
+                ["Bob", "Paris"],
+                ["jatin", "abad"],
+                ["om", "anand"],
+                ["nirmit", "anand"],
+                ["ananya", "canada"],
+                ["het", "abad"],
+                ["shyam", "morbi"],
+                ["dharmik", "vadtal"],
+                ["jay", "abad"],
+                ["jack", "abad"],
+                ["prem", "New York"],
+                ["kirtan", "London"],
+                ["manav", "Paris"],
+                ["jitubhai", "abad"],
+                ["karan", "anand"],
+                ["sakina", "anand"],
+                ["abde", "canada"],
+                ["hetvi", "abad"],
+            ];
+
+            var currentPage = 1;
+            var itemsPerPage = 5;
+            var totalPages = Math.ceil(data.length / itemsPerPage);
+
+            function displayData() {
+                var startIndex = (currentPage - 1) * itemsPerPage;
+                var endIndex = startIndex + itemsPerPage;
+                var displayData = data.slice(startIndex, endIndex);
+
+                var table = document.getElementById("data-table");
+                table.innerHTML = "<tr><th>Name</th><th>Place</th><th>Action</th></tr>";
+
+                for (var i = 0; i < displayData.length; i++) {
+                    var row = table.insertRow(-1);
+                    var nameCell = row.insertCell(0);
+                    var placeCell = row.insertCell(1);
+                    var actionCell = row.insertCell(2);
+                    nameCell.innerHTML = displayData[i][0];
+                    placeCell.innerHTML = displayData[i][1];
+                    actionCell.innerHTML = "<button class='remove-btn' onclick='removeRow(" + (startIndex + i) + ")'>Remove</button>";
+                }
+            }
+
+            function removeRow(index) {
+                data.splice(index, 1);
+                updatePagination();
+                displayData();
+            }
+
+            function addData() {
+                var nameInput = document.getElementById("name");
+                var placeInput = document.getElementById("place");
+
+                var name = nameInput.value.trim();
+                var place = placeInput.value.trim();
+
+                if (name && place) {
+                    data.push([name, place]);
+                    updatePagination();
+                    displayData();
+                    nameInput.value = "";
+                    placeInput.value = "";
+                }
+            }
+
+            function previousPage() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayData();
+                }
+            }
+
+            function nextPage() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayData();
+                }
+            }
+
+            function updatePagination() {
+                totalPages = Math.ceil(data.length / itemsPerPage);
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+            }
+
+            displayData();
+        </script>
+    </body>
+</html>

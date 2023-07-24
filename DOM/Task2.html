@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="form-container">
+        <label for="student-id">Student ID:</label>
+        <input type="text" id="student-id" name="student-id" required>
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="result">Result:</label>
+        <input type="text" id="result" name="result" required>
+        <br>
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" name="phone-number" required>
+        <br>
+        <button onclick="addData()">Add</button>
+    </div>
+
+    <table id="data-table">
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Result</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
+    <div class="pagination">
+        <button onclick="previousPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+    </div>
+
+    <script>
+        var data = [
+            
+            ["21CE060", "Meet", "9.4", "9898807432"],
+            ["21CE062", "Yagnik", "9.7", "9898807432"],
+           
+        ];
+
+        var currentPage = 1;
+        var itemsPerPage = 3;
+        var totalPages = Math.ceil(data.length / itemsPerPage);
+
+        function displayData() {
+            var startIndex = (currentPage - 1) * itemsPerPage;
+            var endIndex = startIndex + itemsPerPage;
+            var displayData = data.slice(startIndex, endIndex);
+
+            var table = document.getElementById("data-table");
+            table.innerHTML = "<tr><th>Student ID</th><th>Name</th><th>Result</th><th>Phone Number</th><th>Action</th></tr>";
+            
+            for (var i = 0; i < displayData.length; i++) {
+                var row = table.insertRow(-1);
+                var studentIdCell = row.insertCell(0);
+                var nameCell = row.insertCell(1);
+                var resultCell = row.insertCell(2);
+                var phoneNumberCell = row.insertCell(3);
+                var actionCell = row.insertCell(4);
+                studentIdCell.innerHTML = displayData[i][0];
+                nameCell.innerHTML = displayData[i][1];
+                resultCell.innerHTML = displayData[i][2];
+                phoneNumberCell.innerHTML = displayData[i][3];
+                actionCell.innerHTML = "<button class='remove-btn' onclick='removeRow(" + (startIndex + i) + ")'>Remove</button>";
+            }
+        }
+
+        function removeRow(index) {
+            data.splice(index, 1);
+            updatePagination();
+            displayData();
+        }
+
+        function addData() {
+            var studentIdInput = document.getElementById("student-id");
+            var nameInput = document.getElementById("name");
+            var resultInput = document.getElementById("result");
+            var phoneNumberInput = document.getElementById("phone-number");
+
+            var studentId = studentIdInput.value.trim();
+            var name = nameInput.value.trim();
+            var result = resultInput.value.trim();
+            var phoneNumber = phoneNumberInput.value.trim();
+
+            if (studentId && name && result && phoneNumber) {
+                data.push([studentId, name, result, phoneNumber]);
+                updatePagination();
+                displayData();
+                studentIdInput.value = "";
+                nameInput.value = "";
+                resultInput.value = "";
+                phoneNumberInput.value = "";
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayData();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayData();
+            }
+        }
+
+        function updatePagination() {
+            totalPages = Math.ceil(data.length / itemsPerPage);
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+        }
+
+        displayData();
+    </script>
+</body>
+</html>
