@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Social Media Signup</title>
+</head>
+<body>
+    <h1>Social Media Signup</h1>
+    <form id="signupForm" onsubmit="return validateForm()">
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" pattern="[A-Za-z0-9]+" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" pattern="^(?=.*[A-Za-z0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{6,10}$" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+        </div>
+        <div>
+            <label for="phone">Phone No:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <label for="state">State:</label>
+            <select id="state" name="state" required>
+                <option value="" disabled selected>Select a state</option>
+                <option value="state1">State 1</option>
+                <option value="state2">State 2</option>
+                <!-- Add more options here -->
+            </select>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <input type="checkbox" id="agreement" name="agreement" required>
+            <label for="agreement">I agree to the terms and conditions.</label>
+            <span style="color: red">*</span>
+        </div>
+        <div>
+            <input type="submit" value="Register">
+        </div>
+    </form>
+
+    <script>
+        function validateForm() {
+            var fullName = document.getElementById("fullName").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
+            var state = document.getElementById("state").value;
+            var agreement = document.getElementById("agreement").checked;
+
+            var errorMessage = "";
+
+            // Regular expression to validate the password
+            var passwordPattern = /^(?=.*[A-Za-z0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{6,10}$/;
+
+            // Full Name validation
+            if (!fullName) {
+                errorMessage += "Please enter your Full Name.\n";
+                document.getElementById("fullName").style.borderColor = "red";
+            }
+
+            // Username validation
+            if (!username.match(/[A-Za-z0-9]+/)) {
+                errorMessage += "Username should contain only alphanumeric characters.\n";
+                document.getElementById("username").style.borderColor = "red";
+            }
+
+            // Password validation
+            if (!password.match(passwordPattern)) {
+                errorMessage += "Password must be alphanumeric with at least one special symbol (@, $, !, %, *, #, ?, &)\n and must be between 6 to 10 characters long.\n";
+                document.getElementById("password").style.borderColor = "red";
+            }
+
+            // Confirm Password validation
+            if (password !== confirmPassword) {
+                errorMessage += "Passwords do not match.\n";
+                document.getElementById("confirmPassword").style.borderColor = "red";
+            }
+
+            // Gender validation
+            if (!gender) {
+                errorMessage += "Please select your gender.\n";
+            }
+
+            // Phone validation
+            if (!phone.match(/[0-9]{10}/)) {
+                errorMessage += "Please enter a valid 10-digit phone number.\n";
+                document.getElementById("phone").style.borderColor = "red";
+            }
+
+            // Email validation
+            if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+                errorMessage += "Please enter a valid email address.\n";
+                document.getElementById("email").style.borderColor = "red";
+            }
+
+            // State validation
+            if (state === "") {
+                errorMessage += "Please select a state.\n";
+                document.getElementById("state").style.borderColor = "red";
+            }
+
+            // Agreement validation
+            if (!agreement) {
+                errorMessage += "Please agree to the terms and conditions.\n";
+                document.getElementById("agreement").style.outline = "1px solid red";
+            }
+
+            // Display error messages
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                return false;
+            }
+
+            // Redirect to login page if all validations pass
+            alert("Registration successful! Redirecting to Login page...");
+            window.location.href = "login.html";
+            return true;
+        }
+    </script>
+</body>
+</html>
