@@ -20,7 +20,7 @@ for (const element of arr) {
 }
 
 const map = new Map();
-map.set("name", "John");
+map.set("name", "Meet");
 map.set("age", 30);
 console.log(map.get("name"));
 console.log(map.get("age"));
@@ -40,7 +40,7 @@ class Person {
   }
 }
 
-const john = new Person("John", 30);
+const john = new Person("Meet", 19);
 john.sayHello(); 
 function fetchData() {
   return new Promise((resolve, reject) => {
