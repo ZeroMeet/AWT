@@ -36,8 +36,8 @@ console.log("Spliced array:", splicedArray);
 
 
 let person = {
-    name: "John Doe",
-    age: 30,
+    name: "Meet Lad",
+    age: 19,
     gender: "Male",
   };
   
