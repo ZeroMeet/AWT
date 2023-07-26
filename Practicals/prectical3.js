@@ -38,8 +38,8 @@ class Person {
   }
 }
 
-const john = new Person("Meet", 19);
-john.sayHello(); 
+const p1 = new Person("Meet", 19);
+p1.sayHello(); 
 function fetchData() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
